@@ -6,8 +6,8 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Add Department
-                                <a href="{{url('admin/department')}}" class="float-right btn btn-success btn-sm">View All</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Add Room
+                                <a href="{{url('admin/rooms')}}" class="float-right btn btn-success btn-sm">View All</a>
                             </h6>
                         </div>
                         <div class="card-body">
@@ -15,18 +15,23 @@
                             <p class="text-success">{{session('success')}}</p>
                             @endif
                             <div class="table-responsive">
-                                <form method="post" action="{{url('admin/department')}}">
+                                <form method="post" action="{{url('admin/rooms')}}">
                                     @csrf
                                     <table class="table table-bordered">
                                         <tr>
-                                            <th>Title</th>
-                                            <td><input name="title" type="text" class="form-control" /></td>
+                                            <th>Select Room Type</th>
+                                            <td>
+                                                <select name="rt_id" class="form-control">
+                                                    <option value="0">--- Select ---</option>
+                                                    @foreach($roomtypes as $rt)
+                                                    <option value="{{$rt->id}}">{{$rt->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <th>Detail</th>
-                                            <td>
-                                                <textarea name="detail" class="form-control"></textarea>
-                                            </td>
+                                            <th>Title</th>
+                                            <td><input name="title" type="text" class="form-control" /></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">

@@ -7,7 +7,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Update Customer
-                                <a href="{{url('admin/banner')}}" class="float-right btn btn-success btn-sm">View All</a>
+                                <a href="{{url('admin/customer')}}" class="float-right btn btn-success btn-sm">View All</a>
                             </h6>
                         </div>
                         <div class="card-body">
@@ -22,25 +22,33 @@
                             <p class="text-success">{{session('success')}}</p>
                             @endif
                             <div class="table-responsive">
-                                <form method="post" enctype="multipart/form-data" action="{{url('admin/banner/'.$data->id)}}">
+                                <form method="post" enctype="multipart/form-data" action="{{url('admin/customer/'.$data->id)}}">
                                     @csrf
                                     @method('put')
                                     <table class="table table-bordered" >
                                         <tr>
-                                            <th>Banner Image<span class="text-danger">*</span></th>
+                                            <th>Full Name <span class="text-danger">*</span></th>
+                                            <td><input value="{{$data->full_name}}" name="full_name" type="text" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email <span class="text-danger">*</span></th>
+                                            <td><input value="{{$data->email}}" name="email" type="email" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mobile <span class="text-danger">*</span></th>
+                                            <td><input value="{{$data->mobile}}" name="mobile" type="text" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Photo</th>
                                             <td>
-                                                <input name="banner_src" type="file" />
-                                                <input type="hidden" name="prev_photo" value="{{$data->banner_src}}" />
-                                                <img width="100" src="{{asset('storage/app/'.$data->banner_src)}}" />
+                                                <input name="photo" type="file" />
+                                                <input type="hidden" name="prev_photo" value="{{$data->photo}}" />
+                                                <img width="100" src="{{asset('storage/app/'.$data->photo)}}" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Alt Text <span class="text-danger">*</span></th>
-                                            <td><input value="{{$data->alt_text}}" name="alt_text" type="text" class="form-control" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Publish Status<span class="text-danger">*</span></th>
-                                            <td><input @if($data->publish_status=='on') checked @endif name="publish_status" type="checkbox" /></td>
+                                            <th>Address</th>
+                                            <td><textarea name="address" class="form-control">{{$data->address}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
